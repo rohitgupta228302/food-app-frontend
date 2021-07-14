@@ -1,79 +1,68 @@
 import logo from "./logo.svg";
-//import "./App.css";
-import reactDom from "react-dom";
-import React, { Component } from "react";
-import Validation from "./components/Validation";
-import Char from "./components/Char";
+import "./App.css";
+//import reactDom from "react-dom";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+//import Validation from "./components/Validation";
+//import Char from "./components/Char";
+import SignUp from "./components/Form/SignUp";
+import Home from "./components/Form/Home";
+import orderNow from "./components/Form/orderNow";
+import ShowBookings from "./components/Form/ShowBookings";
+import NavBar from "./components/Form/NavBar";
+import Login from "./components/Form/Login";
 
-class App extends Component {
-  state = {
-    userInput: "",
-  };
+const App = () => {
+  // class App extends Component {
+  //   state = {
+  //     userInput: "",
+  //   };
 
-  inputChangedHandler = (event) => {
-    this.setState({ userInput: event.target.value });
-  };
+  //   inputChangedHandler = (event) => {
+  //     this.setState({ userInput: event.target.value });
+  //   };
 
-  deleteCharHandler = (index) => {
-    const text = this.state.userInput.split("");
-    text.splice(index, 1);
-    const updatedText = text.join("");
-    this.setState({ userInput: updatedText });
-  };
+  //   deleteCharHandler = (index) => {
+  //     const text = this.state.userInput.split("");
+  //     text.splice(index, 1);
+  //     const updatedText = text.join("");
+  //     this.setState({ userInput: updatedText });
+  //   };
 
-  render() {
-    const charList = this.state.userInput.split("").map((ch, index) => {
-      return (
-        <Char
-          character={ch}
-          key={index}
-          clicked={() => this.deleteCharHandler(index)}
-        />
-      );
-    });
-
-    return (
-      <div className="App">
-        <input
-          type="text"
-          onChange={this.inputChangedHandler}
-          value={this.state.userInput}
-        />
-        <p>{this.state.userInput}</p>
-        <Validation inputLength={this.state.userInput.length} />
-        {charList}
-      </div>
-    );
-  }
-}
-
-// function App() {
-//   let curDate = new Date();
-//   console.log(curDate);
-//   curDate = curDate.getHours();
-//   const cssStyle = {};
-
-//   const myFunc = () => {
-//     let greeting = "";
-//     if (curDate >= 1 && curDate < 12) {
-//       greeting = "Good Morning";
-//       cssStyle.color = "green";
-//     } else if (curDate >= 12 && curDate < 19) {
-//       greeting = "Good Afternoon";
-//       cssStyle.color = "orange";
-//     } else {
-//       greeting = "Good Night";
-//       cssStyle.color = "black";
-//     }
-//     return greeting;
-//   };
-//   return (
-//     <div>
-//       <h1>
-//         Hello Sir, <span style={cssStyle}>{myFunc()}</span>{" "}
-//       </h1>
-//     </div>
-//   );
-// }
-
+  //   render() {
+  //     return (
+  //       <div className="App">
+  //         <input
+  //           type="text"
+  //           onChange={this.inputChangedHandler}
+  //           value={this.state.userInput}
+  //         />
+  //         <p>{this.state.userInput}</p>
+  //         <Validation inputLength={this.state.userInput.length} />
+  //         {this.state.userInput.split("").map((ch, index) => {
+  //           return (
+  //             <Char
+  //               character={ch}
+  //               key={index}
+  //               clicked={() => this.deleteCharHandler(index)}
+  //             />
+  //           );
+  //         })}
+  //       </div>
+  //     );
+  //   }
+  // }
+  return (
+    <>
+      <NavBar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/orderNow" component={orderNow} />
+        <Route exact path="/ShowBookings" component={ShowBookings} />
+        <Route exact path="/SignUp" component={SignUp} />
+        <Route exact path="/Login" component={Login} />
+      </Switch>
+    </>
+  );
+};
 export default App;
